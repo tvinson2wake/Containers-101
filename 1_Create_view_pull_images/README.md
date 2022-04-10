@@ -22,8 +22,9 @@ RUN apt-get install -y nginx
 CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 80
 ```
-**Screenshot your Dockerfile**
-
+``` diff
+- Screenshot your Dockerfile
+```
 Our starting point is from an ubuntu image. From there we add several layers to install and configure the latest version of nginx with `RUN`. `CMD` allows us to specify the default command when the container is started. In this case, this will run the nginx executable. Finally, we specify that we want to `EXPOSE` port 80 so that our nginx application can be accessed outside the container. Remember to change the `LABEL` line to use your own name and Email.
 
 ## Build your image
@@ -40,7 +41,10 @@ The `-t` flag allows us to specify the image name followed by the image tag. By 
 To see the layers within the image you have just created run the following command:
 
 `docker history mynginx`
-**Screenshot the Output**
+
+``` diff
+- Screenshot the Output
+```
 
 Notice that the layers which are from the ubuntu image will have a time stamp longer than the layers explicitly defined in your Dockerfile.
 
@@ -49,7 +53,10 @@ Notice that the layers which are from the ubuntu image will have a time stamp lo
 To see the images you have installed on your machine run the following command:
 
 `docker images`
-**Screenshot the Output**
+
+``` diff
+- Screenshot the Output
+```
 
 
 ## Pulling images
@@ -57,7 +64,10 @@ To see the images you have installed on your machine run the following command:
 You now know how to create a Docker image using a Dockerfile, but with exception of custom built software, you usually want to run images that you don't maintain. Docker Hub is a registry that provides a marketplace for Docker images for all to use. The [official images](https://hub.docker.com/explore/) for products in their Docker-ized format will be built by the maintainers and published here. To pull the official ubuntu image from DockerHub, run the following command:
 
 `docker pull ubuntu`
-**Screenshot the Output**
+
+``` diff
+- Screenshot the Output
+```
 
 
 As our custom built image for nginx was running on ubuntu, the docker engine will not actually pull any layers from DockerHub but will use the same layer it pulled when running the `mynginx` image. If you want to be double sure, you can run `docker history ubuntu` and you should see all the same commands and layer sizes as the base layers for `mynginx`.
